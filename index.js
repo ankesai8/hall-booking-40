@@ -85,14 +85,6 @@ app.get("/", (request, response) => {
   response.send("Hall Booking API");
 });
 
-//Creating a room
-app.post("/rooms/create", (request, response) => {
-
-    const newRoom = request.body;
-    rooms.push(newRoom);
-    response.send(newRoom);
-})
-
 // Booking a room
 app.post("/rooms", (request, response) => {
   const booking = request.body;
@@ -138,11 +130,9 @@ app.get("/rooms", (request, response) => {
 
 //List all customers with booked data
 app.get("/customers", (request, response) => {
-  response.send(
-    rooms
-      .filter((room) => {
-        if (room.bookedStatus === true) {
-          return room;
+  response.send(rooms.filter((room) => {
+              if (room.bookedStatus === true) {
+               return room;
         }
       })
       .map((room) => {
@@ -157,4 +147,5 @@ app.get("/customers", (request, response) => {
   );
 });
 
-app.listen(PORT, () => console.log("server has started at:", PORT));
+app.listen(PORT, () =>
+           console.log("server has started at:", PORT));
